@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="filmInfo"
+            type="com.myapp.myapplicationmuvie.database.Films" />
+        <variable
+            name="filmPoster"
+            type="com.myapp.myapplicationmuvie.database.FilmWithPoster" />
+        <variable
+            name="click"
+            type="com.myapp.myapplicationmuvie.adapter.FilmClickListener"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:onClick="@{() -> click.onClick(filmInfo)}">
+
+        <TextView
+            android:id="@+id/yearFilmView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#0B0A0A"
+            android:textSize="@dimen/text_size_18sp"
+            android:textStyle="bold"
+            app:textYear="@{filmInfo}"/>
+
+        <ImageView
+            android:id="@+id/logoFilmView"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_baseline_broken_image"
+            app:imagePoster="@{filmPoster.poster}"/>
+
+        <TextView
+            android:id="@+id/nameFilmView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#0B0A0A"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold"
+            app:textName="@{filmInfo}"/>
+    </LinearLayout>
+</layout>

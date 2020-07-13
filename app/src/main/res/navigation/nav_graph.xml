@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigateFragment">
+    <fragment
+        android:id="@+id/navigateFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.NavigateFragment"
+        android:label="navigate_fragment"
+        tools:layout="@layout/navigate_fragment" >
+        <action
+            android:id="@+id/action_navigateFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_navigateFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_navigateFragment_to_sessionsFragment"
+            app:destination="@id/sessionsFragment" />
+        <action
+            android:id="@+id/action_navigateFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailedFragment"
+            app:destination="@id/detailedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.FavoritesFragment"
+        android:label="FavoritesFragment" />
+    <fragment
+        android:id="@+id/sessionsFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.SessionsFragment"
+        android:label="sessions_fragment"
+        tools:layout="@layout/sessions_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/detailedFragment"
+        android:name="com.myapp.myapplicationmuvie.fragments.DetailedFragment"
+        android:label="detailed_fragment"
+        tools:layout="@layout/detailed_fragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+</navigation>

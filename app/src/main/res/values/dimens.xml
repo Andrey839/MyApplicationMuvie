@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_25sp">25sp</dimen>
+    <dimen name="text_margin_top">20sp</dimen>
 </resources>

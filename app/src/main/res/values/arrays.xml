@@ -1,12 +1,28 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="name_city_entries">
+        <item>Москва</item>
+        <item>Санкт-Петербургкт-</item>
+        <item>Зеленоград</item>
+        <item>Химки</item>
+        <item>Нижний новгород</item>
+        <item>Екатеринбург</item>
+        <item>Владивосток</item>
+        <item>Архангельск</item>
+        <item>Челябинск</item>
+        <item>Новодвинск</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="city_values">
+        <item>Москва</item>
+        <item>Санкт-питербург</item>
+        <item>Зеленоград</item>
+        <item>Химки</item>
+        <item>Нижний Новгород</item>
+        <item>Екатеринбург</item>
+        <item>Владивосток</item>
+        <item>Архангельск</item>
+        <item>Челябинск</item>
+        <item>Новодвинск</item>
     </string-array>
 </resources>

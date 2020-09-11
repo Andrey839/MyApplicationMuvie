@@ -10,39 +10,44 @@ interface DaoFilms {
     @Query("select * from Films")
     fun getVideo(): LiveData<List<Films>>
 
-    @Query("select id from Films")
-    fun getId(): LiveData<List<FilmsId>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE, entity = Films::class)
+    fun insertIdDescriptionYearName(vararg films: Films)
 
-    @Transaction
-    @Query("select * from Films")
-    fun getPosterVideo(): LiveData<List<FilmWithPoster>>
-
-    @Transaction
-    @Query("select * from Films")
-    fun getTrailerVideo(): LiveData<List<FilmWithTrailer>>
-
-    @Transaction
-    @Query("select * from Films where id = :idTrailer")
-    fun getOneTrailer(idTrailer: Int): LiveData<FilmWithTrailer>
-
-    @Transaction
-    @Query("select * from Films where id =:idPoster")
-    fun getOnePoster(idPoster: Int): LiveData<FilmWithPoster>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertIdDescriptionYearName(vararg: List<Films>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPoster( poster: Poster)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTrailers( trailer: Trailer?)
 }
 
-@Database(entities = [Films::class, Poster::class, Trailer::class], version = 1)
-@TypeConverters(ConverterRating::class)
+@Dao
+interface DaoFavorite{
+
+    @Insert
+    @Transaction
+    fun insertFavoritesFilm(film: Favorite)
+
+    @Query("select * from FavoritesFilm where id =:id")
+    fun queryOneFilm(id: Int): LiveData<Favorite>
+
+    @Query("select * from FavoritesFilm")
+    fun queryFilms(): LiveData<List<Favorite>>
+
+    @Delete
+    fun deleteOneFilm(film: Favorite)
+}
+
+@Dao
+interface DaoModel{
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertModelFilm(film: Model)
+
+    @Query("select * from AllInOne")
+    fun queryAllFilms(): LiveData<List<Model>>
+}
+
+@Database(entities = [Films::class, Favorite::class, Model::class], version = 1)
+@TypeConverters(ConverterRating::class, ConverterList::class, ConverterListString::class)
 abstract class DatabaseVideo : RoomDatabase() {
     abstract val daoFilms: DaoFilms
+    abstract val daoFavorite: DaoFavorite
+    abstract val daoModel: DaoModel
 }
 
 private lateinit var INSTANCE: DatabaseVideo

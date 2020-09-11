@@ -2,23 +2,41 @@
     <string name="app_name">ApplicationFilms</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="watch_trailer_film_button">Смотреть трейлер</string>
+    <string name="covi_19_sessions_film">В связи с Covi19 сеансы фильмов отсутствуют</string>
     <string name="menu_home">Главная</string>
     <string name="menu_sessions_films">Сеансы</string>
     <string name="menu_favorite_films">Избранное</string>
     <string name="menu_settings">Настройки</string>
     <string name="your_name">yourName</string>
+
+    <!-- Registration Fragment -->
+    <string name="input_name">Введите ваше имя</string>
+    <string name="input_email">Введите ваш email</string>
+    <string name="password">Введите пароль</string>
+    <string name="again_password">Повторите ваш пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="or">Или</string>
+    <string name="error">Поле не должно быть пустым</string>
+    <string name="errorPassword">Пароль не должен быть менее 8 символов</string>
+    <string name="errorPasswordAgain">Пароли не совпадают</string>
+
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header">Твой город</string>
+    <string name="sync_header">Пользовательские настройки</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- City Preferences -->
+    <string name="reply_title">Выбери свой город из списка</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- Delete Preferences -->
+    <string name="sync_title">Удалить аккаунт</string>
+    <string name="avatar_user">Установить фото</string>
+    <string name="rename_user">Изменить имя</string>
+
+    <!-- SnackBar -->
+    <string name="delete_film_with_favorite">Удалить фильм из избранного?</string>
+    <string name="OK">Ок</string>
+
+
 </resources>

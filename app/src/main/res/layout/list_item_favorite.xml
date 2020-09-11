@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.myapp.myapplicationmuvie.database.Favorite" />
+        <variable
+            name="callback"
+            type="com.myapp.myapplicationmuvie.adapter.ListenerCallback" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{() ->callback.onClick(viewModel)}">
+
+        <TextView
+            android:id="@+id/nameFilmFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold"
+            app:textName="@{viewModel.name}"/>
+
+        <ImageView
+            android:id="@+id/posterFilmFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            app:imagePoster="@{viewModel.poster}"
+            app:srcCompat="@drawable/ic_baseline_broken_image" />
+
+        <TextView
+            android:id="@+id/yearFilmFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/text_size_18sp"
+            android:textStyle="italic"
+            app:textYear="@{viewModel.year}" />
+    </LinearLayout>
+</layout>

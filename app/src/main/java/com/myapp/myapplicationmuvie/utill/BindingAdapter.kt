@@ -4,26 +4,65 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.myapp.myapplicationmuvie.database.Films
-import com.myapp.myapplicationmuvie.database.Poster
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.myapp.myapplicationmuvie.R
+import com.myapp.myapplicationmuvie.database.Model
 
 @BindingAdapter("textName")
-fun TextView.setName(item: Films){
+fun TextView.setNames(item: String) {
+    let {
+        text = item
+    }
+}
+
+@BindingAdapter("textYear")
+fun TextView.setYear(item: String) {
+    let {
+        text = item
+    }
+}
+
+@BindingAdapter("imagePoster")
+fun ImageView.setPoster(item: String) {
+    let {
+        Glide.with(it.context).load(item).centerCrop().into(it)
+    }
+}
+
+@BindingAdapter("setNameDetail")
+fun TextView.nameFilm(item: Model) {
     let {
         text = item.name
     }
 }
 
-@BindingAdapter("textYear")
-fun TextView.setYear(item: Films){
+@BindingAdapter("setPosterDetail")
+fun ImageView.posterFilm(item: Model) {
     let {
-        text = item.year.toString()
+        Glide.with(it.context).load(item.poster).error(R.drawable.ic_baseline_broken_image)
+            .centerCrop().into(it)
     }
 }
 
-@BindingAdapter("imagePoster")
-fun ImageView.setPoster(item: Poster){
+@BindingAdapter("setDescriptionDetail")
+fun TextView.descriptionFilm(item: Model) {
     let {
-        Glide.with(it.context).load(item.poster).circleCrop().into(it)
+        text = item.description
+    }
+}
+
+@BindingAdapter("setRatingDetail")
+fun TextView.ratingFilm(item: Model) {
+    val string = item.ratings
+    let {
+        text = "Рейтинг $string"
+    }
+}
+
+@BindingAdapter("setBackground")
+fun FloatingActionButton.background(item: Any?){
+    let {
+            if (item == null) it.setImageDrawable(resources.getDrawable(R.drawable.plus))
+            else it.setImageDrawable(resources.getDrawable(R.drawable.minus))
     }
 }

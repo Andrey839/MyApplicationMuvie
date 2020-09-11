@@ -14,7 +14,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="sessions" />
+            android:gravity="center"
+            android:text="@string/covi_19_sessions_film"
+            android:textColor="#FBF9F9"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold" />
 
     </FrameLayout>
 </layout>

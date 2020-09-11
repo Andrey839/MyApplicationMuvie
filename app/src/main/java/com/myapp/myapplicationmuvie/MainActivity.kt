@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         nameUser.text = sharedPreference?.getString("name", "???")
         Glide.with(avatarUser.context).load(sharedPreference?.getString("uri", ""))
             .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
-            .centerCrop().into(avatarUser)
+            .circleCrop().into(avatarUser)
     }
 
     private fun delayedInit(constraints: Constraints) {
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             if (key == "name") nameUser.text = sharedPreferences.getString(key, "???")
             else Glide.with(avatarUser.context).load(sharedPreferences.getString("uri", ""))
                 .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
-                .centerCrop().into(avatarUser)
+                .circleCrop().into(avatarUser)
         }
 
         sharedPreference?.registerOnSharedPreferenceChangeListener(listener)

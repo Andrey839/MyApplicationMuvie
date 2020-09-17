@@ -22,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
 import com.myapp.myapplicationmuvie.R
 import com.myapp.myapplicationmuvie.database.Favorite
 import com.myapp.myapplicationmuvie.database.getDatabase
@@ -80,6 +81,13 @@ class DetailedFragment : Fragment() {
             inflater, R.layout.detailed_fragment,
             container, false
         )
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment_container
+            duration = resources.getInteger(R.integer.config_navAnimTime).toLong()
+            scrimColor = Color.TRANSPARENT
+//            setAllContainerColors(requireContext().theme.resolveAttribute(R.attr.colorOnSurface, true))
+        }
 
         val application = requireNotNull(this.activity).application
         val database = getDatabase(application)

@@ -17,6 +17,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:transitionName="@string/transition_detailed"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context=".fragments.DetailedFragment">
@@ -37,7 +38,7 @@
                 app:expandedTitleGravity="top"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/posterFilm"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"

@@ -37,6 +37,8 @@
     <!-- SnackBar -->
     <string name="delete_film_with_favorite">Удалить фильм из избранного?</string>
     <string name="OK">Ок</string>
+    <string name="transition_detailed">transition_name_detailed</string>
+    <string name="transition_name_favorite">transition_favorite</string>
 
 
 </resources>

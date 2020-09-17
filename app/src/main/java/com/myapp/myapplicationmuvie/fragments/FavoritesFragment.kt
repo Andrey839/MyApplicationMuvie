@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.myapp.myapplicationmuvie.modelViews.FavoritesViewModel
 import com.myapp.myapplicationmuvie.R
 import com.myapp.myapplicationmuvie.adapter.AdapterFavoriteFilm
@@ -24,6 +26,7 @@ import com.myapp.myapplicationmuvie.databinding.FavoritesFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.FavoritesViewModelFactory
 import com.myapp.myapplicationmuvie.networkService.Api
 import com.myapp.myapplicationmuvie.repository.Repository
+import kotlinx.android.synthetic.main.list_item_favorite.*
 import kotlinx.coroutines.*
 
 class FavoritesFragment : Fragment() {
@@ -49,8 +52,10 @@ class FavoritesFragment : Fragment() {
 
         viewModelAdapter = AdapterFavoriteFilm(arrayListOf(), ListenerCallback {
             if (findNavController().currentDestination?.id == R.id.favorite_item) {
-                this.findNavController()
-                    .navigate(FavoritesFragmentDirections.actionFavoriteItemToDetailedFragment(it.toModel()))
+                val transitionNameDetailFragment = getString(R.string.transition_detailed)
+                val extras = FragmentNavigatorExtras(item_container to transitionNameDetailFragment)
+                val direction = FavoritesFragmentDirections.actionFavoriteItemToDetailedFragment(it.toModel())
+                this.findNavController().navigate(direction,extras)
             }
         })
 

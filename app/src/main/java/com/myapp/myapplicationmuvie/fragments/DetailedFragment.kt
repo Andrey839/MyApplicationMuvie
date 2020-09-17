@@ -85,6 +85,7 @@ class DetailedFragment : Fragment() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment_container
             duration = resources.getInteger(R.integer.config_navAnimTime).toLong()
+            isElevationShadowEnabled = true
             scrimColor = Color.TRANSPARENT
 //            setAllContainerColors(requireContext().theme.resolveAttribute(R.attr.colorOnSurface, true))
         }

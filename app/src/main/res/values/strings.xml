@@ -39,6 +39,7 @@
     <string name="OK">Ок</string>
     <string name="transition_detailed">transition_name_detailed</string>
     <string name="transition_name_favorite">transition_favorite</string>
+    <string name="transition_home">transition_home</string>
 
 
 </resources>

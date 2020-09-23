@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     private var listener: SharedPreferences.OnSharedPreferenceChangeListener? = null
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
         findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)
         val myDrawer = findViewById<DrawerLayout>(R.id.myDrawer)
         NavigationUI.setupActionBarWithNavController(this, navController, myDrawer)
@@ -90,6 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+
         val header = navigation_view.getHeaderView(0)
         val nameUser = header.findViewById<TextView>(R.id.avatar)
         val avatarUser = header.findViewById<ImageView>(R.id.avatar_view)

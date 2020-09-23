@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/home_item"
         android:name="com.myapp.myapplicationmuvie.fragments.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="Главная" >
         <action
             android:id="@+id/action_homeFragment_to_detailedFragment"
             app:destination="@id/detailedFragment"
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/favorite_item"
         android:name="com.myapp.myapplicationmuvie.fragments.FavoritesFragment"
-        android:label="FavoritesFragment" >
+        android:label="Избранное" >
         <action
             android:id="@+id/action_favorite_item_to_detailedFragment"
             app:destination="@id/detailedFragment"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.myapp.myapplicationmuvie.fragments.RegistrationFragment"
-        android:label="RegistrationFragment" >
+        android:label="Регистрация" >
         <action
             android:id="@+id/action_registrationFragment_to_homeFragment"
             app:destination="@id/home_item"
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/detailedFragment"
         android:name="com.myapp.myapplicationmuvie.fragments.DetailedFragment"
-        android:label="DetailedFragment" >
+        android:label="Детальная информация" >
         <argument
             android:name="id"
             app:argType="com.myapp.myapplicationmuvie.database.Model" />
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/sessions_item"
         android:name="com.myapp.myapplicationmuvie.fragments.SessionsFragment"
-        android:label="SessionsFragment" >
+        android:label="Сеансы" >
         <action
             android:id="@+id/action_sessionsFragment_to_homeFragment"
             app:destination="@id/home_item"
@@ -69,7 +69,7 @@
     <fragment
         android:id="@+id/settings_item"
         android:name="com.myapp.myapplicationmuvie.fragments.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="Настройки" >
         <action
             android:id="@+id/action_settingsFragment_to_homeFragment"
             app:destination="@id/home_item"

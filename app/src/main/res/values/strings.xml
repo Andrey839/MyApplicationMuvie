@@ -4,11 +4,15 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="watch_trailer_film_button">Смотреть трейлер</string>
     <string name="covi_19_sessions_film">В связи с Covi19 сеансы фильмов отсутствуют</string>
+    <string name="your_name">yourName</string>
+    <string name="exit_app">Выйти из приложения?</string>
+
+    <!-- Menu -->
     <string name="menu_home">Главная</string>
     <string name="menu_sessions_films">Сеансы</string>
     <string name="menu_favorite_films">Избранное</string>
     <string name="menu_settings">Настройки</string>
-    <string name="your_name">yourName</string>
+
 
     <!-- Registration Fragment -->
     <string name="input_name">Введите ваше имя</string>

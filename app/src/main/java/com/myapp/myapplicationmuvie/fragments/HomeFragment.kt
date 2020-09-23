@@ -2,7 +2,6 @@ package com.myapp.myapplicationmuvie.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +21,7 @@ import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.databinding.HomeFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.HomeVideoViewModelFactory
 import com.myapp.myapplicationmuvie.modelViews.HomeViewModel
+import kotlinx.android.synthetic.main.ilist_item_home.*
 
 class HomeFragment : Fragment() {
 
@@ -61,7 +62,7 @@ class HomeFragment : Fragment() {
 
         val manager = GridLayoutManager(activity, 2)
         val adapter = AdapterFilmsNow {
-            viewModel.detailedInfoFilm(it)
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailedFragment(it))
         }
 
         binding.recyclerViewHome.adapter = adapter
@@ -85,16 +86,6 @@ class HomeFragment : Fragment() {
                 adapter.submitList(it)
             } else {
                 binding.loadSpinner.visibility = View.VISIBLE
-            }
-        })
-
-        viewModel.toDetailedInfoFilm?.observe(viewLifecycleOwner, Observer {
-            if (findNavController().currentDestination?.id == R.id.home_item) {
-                if (it != null) {
-                    this.findNavController()
-                        .navigate(HomeFragmentDirections.actionHomeFragmentToDetailedFragment(it))
-                    viewModel.detailedInfoFilmReset()
-                }
             }
         })
 

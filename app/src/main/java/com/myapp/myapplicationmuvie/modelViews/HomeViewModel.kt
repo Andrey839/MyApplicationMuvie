@@ -19,19 +19,6 @@ class HomeViewModel(val context: Activity, dataSource: DatabaseVideo) :
     val listModel: LiveData<List<Model>>
     get() = _listModel
 
-    private val _toDetailedInfoFilm = MutableLiveData<Model>()
-
-    val toDetailedInfoFilm: LiveData<Model>?
-        get() = _toDetailedInfoFilm
-
-    fun detailedInfoFilm(model: Model?) {
-        _toDetailedInfoFilm.value = model
-    }
-
-    fun detailedInfoFilmReset() {
-        _toDetailedInfoFilm.value = null
-    }
-
 }
 
 class HomeVideoViewModelFactory(

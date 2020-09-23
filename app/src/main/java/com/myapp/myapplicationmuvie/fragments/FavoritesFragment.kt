@@ -52,11 +52,7 @@ class FavoritesFragment : Fragment() {
 
         viewModelAdapter = AdapterFavoriteFilm(arrayListOf(), ListenerCallback {
             if (findNavController().currentDestination?.id == R.id.favorite_item) {
-              // add transition Navigation
-                val transitionNameDetailFragment = getString(R.string.transition_detailed)
-                val extras = FragmentNavigatorExtras(item_container to transitionNameDetailFragment)
-                val direction = FavoritesFragmentDirections.actionFavoriteItemToDetailedFragment(it.toModel())
-                this.findNavController().navigate(direction,extras)
+                this.findNavController().navigate(FavoritesFragmentDirections.actionFavoriteItemToDetailedFragment(it.toModel()))
             }
         })
 

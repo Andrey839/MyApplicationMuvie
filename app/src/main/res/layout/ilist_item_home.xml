@@ -12,6 +12,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_container_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -28,11 +29,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:transitionName="@{@string/transition_home(viewModel.id)}"
                 android:text=""
-                android:textColor="#0B0A0A"
+                android:textColor="#EEECE7E7"
                 android:textSize="@dimen/text_size_18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:transitionName="@{@string/transition_home(viewModel.year)}"/>
 
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -41,7 +42,8 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:background="@android:color/darker_gray"
-                app:srcCompat="@drawable/ic_baseline_broken_image" />
+                app:srcCompat="@drawable/ic_baseline_broken_image"
+                android:transitionName="@{@string/transition_home(viewModel.poster)}"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nameFilmView"
@@ -53,7 +55,8 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:transitionName="@{@string/transition_home(viewModel.name)}"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

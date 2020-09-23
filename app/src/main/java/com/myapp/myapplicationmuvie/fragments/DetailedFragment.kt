@@ -23,6 +23,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import com.myapp.myapplicationmuvie.R
 import com.myapp.myapplicationmuvie.database.Favorite
 import com.myapp.myapplicationmuvie.database.getDatabase
@@ -82,13 +83,13 @@ class DetailedFragment : Fragment() {
             container, false
         )
 
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment_container
-            duration = resources.getInteger(R.integer.config_navAnimTime).toLong()
-            isElevationShadowEnabled = true
-            scrimColor = Color.TRANSPARENT
-//            setAllContainerColors(requireContext().theme.resolveAttribute(R.attr.colorOnSurface, true))
-        }
+       sharedElementEnterTransition = MaterialContainerTransform().apply {
+           drawingViewId = R.id.nav_host_fragment_container
+           duration = 300L
+           isElevationShadowEnabled = true
+           scrimColor = Color.TRANSPARENT
+           MaterialElevationScale(true)
+       }
 
         val application = requireNotNull(this.activity).application
         val database = getDatabase(application)
@@ -110,7 +111,7 @@ class DetailedFragment : Fragment() {
 
         viewModel.urlTrailer.observe(viewLifecycleOwner, Observer {
             if (it[0].trailer.isNotEmpty()) {
-                binding.watchTrailerFilm.visibility = View.VISIBLE
+                binding.watchTrailerFilm.isEnabled = true
                 val http = "http:/"
                 val string = it[0].trailer[0].substringAfter('/')
                 val urlString = string.substringBefore('"')

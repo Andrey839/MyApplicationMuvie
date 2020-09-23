@@ -17,26 +17,20 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:transitionName="@string/transition_detailed"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".fragments.DetailedFragment">
+        android:fitsSystemWindows="true">
 
-      <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+            android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/myCollapsing"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="@android:color/black"
                 android:fitsSystemWindows="true"
-                app:expandedTitleGravity="top"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/posterFilm"
@@ -44,6 +38,9 @@
                     android:layout_height="400dp"
                     android:src="@drawable/ic_baseline_broken_image"
                     app:layout_collapseMode="parallax"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:setPosterDetail="@{viewModel.model}" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -52,45 +49,54 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:transitionName="@string/transition_detailed">
 
-                <TextView
-                    android:id="@+id/descriptionFilm"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_18sp"
-                    android:textStyle="italic"
-                    app:setDescriptionDetail="@{viewModel.model}" />
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/ratingFilm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/text_size_25sp"
-                    android:textStyle="bold"
-                    app:setRatingDetail="@{viewModel.model}" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/descriptionFilm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_18sp"
+                        android:textStyle="italic"
+                        app:setDescriptionDetail="@{viewModel.model}" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/watchTrailerFilm"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/text_margin_top"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="@string/watch_trailer_film_button"
-                    android:visibility="gone" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ratingFilm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/text_size_25sp"
+                        android:textStyle="bold"
+                        app:setRatingDetail="@{viewModel.model}" />
 
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/watchTrailerFilm"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/text_margin_top"
+                        android:clickable="true"
+                        android:enabled="false"
+                        android:focusable="true"
+                        android:text="@string/watch_trailer_film_button" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -98,12 +104,13 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@id/appBar"
+            android:layout_marginEnd="20dp"
+            android:onClick="@{()-> viewModel.clickStarsButton()}"
+            app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|right|end"
-            android:layout_marginEnd="5dp"
-            app:setBackground="@{viewModel.favoritesValue}"
-            android:onClick="@{()-> viewModel.clickStarsButton()}"/>
+            app:setBackground="@{viewModel.favoritesValue}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </layout>

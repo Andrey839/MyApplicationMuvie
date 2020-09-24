@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.databinding.HomeFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.HomeVideoViewModelFactory
 import com.myapp.myapplicationmuvie.modelViews.HomeViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.ilist_item_home.*
 
 class HomeFragment : Fragment() {

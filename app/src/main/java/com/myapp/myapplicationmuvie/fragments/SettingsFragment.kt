@@ -28,7 +28,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val getUri = registerForActivityResult(ActivityResultContracts.GetContent()){
             editor?.putString("uri", it.toString())?.apply()
-            Log.e("tyi", "$it")
         }
 
         photoPreference?.setOnPreferenceClickListener {

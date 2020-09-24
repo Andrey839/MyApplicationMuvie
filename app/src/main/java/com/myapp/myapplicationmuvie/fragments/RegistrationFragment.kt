@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
@@ -23,6 +24,7 @@ import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.databinding.RegistrationFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.RegistrationViewModel
 import com.myapp.myapplicationmuvie.modelViews.RegistrationViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 
 class RegistrationFragment : Fragment() {
@@ -66,13 +68,11 @@ class RegistrationFragment : Fragment() {
                     }
                 }
             })
+        val preferenceName = activity?.getPreferences(Context.MODE_PRIVATE)
+        val editor = preferenceName?.edit()
 
         binding.inputName.addTextChangedListener {
-            val preferenceName = activity?.getPreferences(Context.MODE_PRIVATE)
-            preferenceName?.edit() ?: return@addTextChangedListener with(preferenceName?.edit()) {
-                this?.putString("name", it.toString())
-                this?.apply()
-            }
+            editor?.putString("name", it.toString())?.apply()
         }
 
         binding.inputEmail.addTextChangedListener {

@@ -57,10 +57,12 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, myDrawer)
 
         sharedPreference = this.getPreferences(Context.MODE_PRIVATE)
+        sharedPreference?.registerOnSharedPreferenceChangeListener(listener)
 
         val header = navigation_view.getHeaderView(0)
         val nameUser = header.findViewById<TextView>(R.id.avatar)
         val avatarUser = header.findViewById<ImageView>(R.id.avatar_view)
+
         nameUser.text = sharedPreference?.getString("name", "???")
         Glide.with(avatarUser.context).load(sharedPreference?.getString("uri", ""))
             .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))

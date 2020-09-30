@@ -5,7 +5,7 @@
     <string name="watch_trailer_film_button">Смотреть трейлер</string>
     <string name="covi_19_sessions_film">В связи с Covi19 сеансы фильмов отсутствуют</string>
     <string name="your_name">yourName</string>
-    <string name="exit_app">Выйти из приложения?</string>
+    <string name="rating">Рейтинг</string>
 
     <!-- Menu -->
     <string name="menu_home">Главная</string>
@@ -44,6 +44,14 @@
     <string name="transition_detailed">transition_name_detailed</string>
     <string name="transition_name_favorite">transition_favorite</string>
     <string name="transition_home">transition_home</string>
+    <string name="exit_app">Выйти из приложения?</string>
 
+
+    <!-- Toast -->
+    <string name="film_delete_with_favorite">Фильм удалён из избранного</string>
+    <string name="film_add">Фильм добавлен</string>
+    <string name="exit_done">Выполнен выход из аккаунта</string>
+    <string name="registration_succesful">Успешная регистрация</string>
+    <string name="registration_error">Регистрация не удалась</string>
 
 </resources>

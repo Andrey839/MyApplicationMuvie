@@ -1,39 +1,28 @@
 package com.myapp.myapplicationmuvie.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
-import com.myapp.myapplicationmuvie.modelViews.FavoritesViewModel
 import com.myapp.myapplicationmuvie.R
 import com.myapp.myapplicationmuvie.adapter.AdapterFavoriteFilm
 import com.myapp.myapplicationmuvie.adapter.ListenerCallback
-import com.myapp.myapplicationmuvie.database.DatabaseVideo
 import com.myapp.myapplicationmuvie.database.Favorite
 import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.database.toModel
 import com.myapp.myapplicationmuvie.databinding.FavoritesFragmentBinding
+import com.myapp.myapplicationmuvie.modelViews.FavoritesViewModel
 import com.myapp.myapplicationmuvie.modelViews.FavoritesViewModelFactory
-import com.myapp.myapplicationmuvie.networkService.Api
 import com.myapp.myapplicationmuvie.repository.Repository
-import kotlinx.android.synthetic.main.list_item_favorite.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class FavoritesFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = FavoritesFragment()
-    }
 
     private var viewModel: FavoritesViewModel? = null
 
@@ -52,17 +41,19 @@ class FavoritesFragment : Fragment() {
 
         viewModelAdapter = AdapterFavoriteFilm(arrayListOf(), ListenerCallback {
             if (findNavController().currentDestination?.id == R.id.favorite_item) {
-                this.findNavController().navigate(FavoritesFragmentDirections.actionFavoriteItemToDetailedFragment(it.toModel()))
+                this.findNavController()
+                    .navigate(
+                        FavoritesFragmentDirections
+                            .actionFavoriteItemToDetailedFragment(it.toModel())
+                    )
             }
         })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_favorite).apply {
             adapter = viewModelAdapter
         }
-
-            return binding.root
+        return binding.root
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -80,6 +71,4 @@ class FavoritesFragment : Fragment() {
             viewModelAdapter?.setData(arrayList)
         })
     }
-
-
 }

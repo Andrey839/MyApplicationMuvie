@@ -8,28 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/myCollapsingLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@android:color/black"
-            app:expandedTitleGravity="top"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/myToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
--->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/myDrawer"
         android:layout_width="match_parent"

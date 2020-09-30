@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.myapp.myapplicationmuvie.R
 import com.myapp.myapplicationmuvie.database.DatabaseVideo
 import com.myapp.myapplicationmuvie.repository.Repository
 import kotlinx.coroutines.CoroutineScope
@@ -47,14 +48,14 @@ class RegistrationViewModel(database: DatabaseVideo, private val auth: FirebaseA
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
 
-                        Toast.makeText(context,"createUserWithEmail:success", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,context.getString(R.string.registration_succesful), Toast.LENGTH_LONG).show()
                         _successOrNotInput.value = true
 
   // update UI
                     } else {
                         // If sign in fails, display a message to the user.
 
-                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.registration_error), Toast.LENGTH_SHORT).show()
                         //           updateUI(null)
                         _successOrNotInput.value = false
                     }
@@ -74,7 +75,7 @@ class RegistrationViewModel(database: DatabaseVideo, private val auth: FirebaseA
                     } else {
                         // If sign in fails, display a message to the user.
 
-                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.registration_error), Toast.LENGTH_SHORT).show()
                         _successOrNotInput.value = false
                     }
                 }

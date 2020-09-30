@@ -8,7 +8,8 @@ import androidx.work.WorkerParameters
 import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.repository.Repository
 
-class WorkTime( context: Context, work: WorkerParameters): CoroutineWorker(appContext = context, params = work) {
+class WorkTime(context: Context, work: WorkerParameters) :
+    CoroutineWorker(appContext = context, params = work) {
 
     companion object {
         const val WORK_NAME = "RefreshDataWorker"

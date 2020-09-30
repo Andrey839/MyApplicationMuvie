@@ -1,14 +1,11 @@
 package com.myapp.myapplicationmuvie.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
@@ -24,14 +21,11 @@ import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.databinding.RegistrationFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.RegistrationViewModel
 import com.myapp.myapplicationmuvie.modelViews.RegistrationViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 
-class RegistrationFragment : Fragment() {
+const val KEY_NAME = "name"
 
-    companion object {
-        fun newInstance() = RegistrationFragment()
-    }
+class RegistrationFragment : Fragment() {
 
     private var auth: FirebaseAuth? = null
 
@@ -45,7 +39,6 @@ class RegistrationFragment : Fragment() {
         )
     }
 
-    @SuppressLint("CommitPrefEdits")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +65,7 @@ class RegistrationFragment : Fragment() {
         val editor = preferenceName?.edit()
 
         binding.inputName.addTextChangedListener {
-            editor?.putString("name", it.toString())?.apply()
+            editor?.putString(KEY_NAME, it.toString())?.apply()
         }
 
         binding.inputEmail.addTextChangedListener {
@@ -115,7 +108,6 @@ class RegistrationFragment : Fragment() {
                 toHomeFragment()
             }
         })
-
         return binding.root
     }
 
@@ -135,5 +127,4 @@ class RegistrationFragment : Fragment() {
                 .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
         }
     }
-
 }

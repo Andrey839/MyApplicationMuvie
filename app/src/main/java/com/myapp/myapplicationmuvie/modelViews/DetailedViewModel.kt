@@ -11,6 +11,8 @@ import com.myapp.myapplicationmuvie.networkService.TrailerJson
 import com.myapp.myapplicationmuvie.repository.Repository
 import kotlinx.coroutines.*
 
+const val DELAY = 10000L
+
 class DetailedViewModel(
     private val id: Model,
     private val repository: Repository
@@ -28,18 +30,16 @@ class DetailedViewModel(
 
     private val _snackBoolean = MutableLiveData<Boolean>()
 
-    private var _favoritesValue: LiveData<Favorite> = repository.favoriteFilm(id.id)
+    val favoritesValue : LiveData<Favorite>
+       get() = repository.favoriteFilm(id.id)
 
     init {
         scope.launch {
-            delay(10000)
+            delay(DELAY)
             string = repository.getTrailerFilm(id.id)
             urlTrailer.value = string
         }
     }
-
-    val favoritesValue: LiveData<Favorite>
-        get() = _favoritesValue
 
     val snackBoolean: LiveData<Boolean>
     get() = _snackBoolean

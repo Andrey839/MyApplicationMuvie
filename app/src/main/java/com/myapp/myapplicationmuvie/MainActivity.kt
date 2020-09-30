@@ -17,8 +17,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.myapp.myapplicationmuvie.fragments.KEY_NAME
+import com.myapp.myapplicationmuvie.fragments.KEY_URI
 import com.myapp.myapplicationmuvie.work.WorkTime
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.header_main_menu.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,8 +66,8 @@ class MainActivity : AppCompatActivity() {
         val nameUser = header.findViewById<TextView>(R.id.avatar)
         val avatarUser = header.findViewById<ImageView>(R.id.avatar_view)
 
-        nameUser.text = sharedPreference?.getString("name", "???")
-        Glide.with(avatarUser.context).load(sharedPreference?.getString("uri", ""))
+        nameUser.text = sharedPreference?.getString(KEY_NAME, "???")
+        Glide.with(avatarUser.context).load(sharedPreference?.getString(KEY_URI, ""))
             .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
             .circleCrop().into(avatarUser)
     }
@@ -97,12 +100,12 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
 
         val header = navigation_view.getHeaderView(0)
-        val nameUser = header.findViewById<TextView>(R.id.avatar)
-        val avatarUser = header.findViewById<ImageView>(R.id.avatar_view)
+        val nameUser = header.avatar
+        val avatarUser = header.avatar_view
 
         listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            if (key == "name") nameUser.text = sharedPreferences.getString(key, "???")
-            else Glide.with(avatarUser.context).load(sharedPreferences.getString("uri", ""))
+            if (key == KEY_NAME) nameUser.text = sharedPreferences.getString(key, "???")
+            else Glide.with(avatarUser.context).load(sharedPreferences.getString(KEY_URI, ""))
                 .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
                 .circleCrop().into(avatarUser)
         }
@@ -112,9 +115,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         sharedPreference?.unregisterOnSharedPreferenceChangeListener(listener)
-        super.onDestroy()
+        super.onStop()
     }
 
 }

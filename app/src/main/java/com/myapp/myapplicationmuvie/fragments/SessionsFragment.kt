@@ -11,10 +11,6 @@ import com.myapp.myapplicationmuvie.R
 
 class SessionsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SessionsFragment()
-    }
-
     private lateinit var viewModel: SessionsViewModel
 
     override fun onCreateView(

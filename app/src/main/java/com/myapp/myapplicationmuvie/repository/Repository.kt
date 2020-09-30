@@ -6,7 +6,8 @@ package com.myapp.myapplicationmuvie.repository
  import com.myapp.myapplicationmuvie.database.DatabaseVideo
  import com.myapp.myapplicationmuvie.database.Favorite
  import com.myapp.myapplicationmuvie.database.Model
- import com.myapp.myapplicationmuvie.model.toModel
+ import com.myapp.myapplicationmuvie.database.filmsPosterToModel
+ import com.myapp.myapplicationmuvie.modelViews.DELAY
  import com.myapp.myapplicationmuvie.networkService.Api
  import com.myapp.myapplicationmuvie.networkService.FilmsJson
  import com.myapp.myapplicationmuvie.networkService.TrailerJson
@@ -70,7 +71,7 @@ class Repository(private val databaseVideo: DatabaseVideo) {
 // add information about films in Database
                 databaseVideo.daoFilms.insertIdDescriptionYearName(*playlist.asDatabase())
                 for (i in  playlist) {
-                    delay(10000)
+                    delay(DELAY)
                     addPoster(i)
                 }
             }
@@ -82,7 +83,7 @@ class Repository(private val databaseVideo: DatabaseVideo) {
         withContext(Dispatchers.IO) {
             try {
                 val poster = Api.getData.getPostersAsync(film.id).await()
-                databaseVideo.daoModel.insertModelFilm(toModel.filmsPosterToModel(film, poster[0].poster))
+                databaseVideo.daoModel.insertModelFilm(filmsPosterToModel(film, poster[0].poster))
             }catch (i: JsonDataException) {
             }
         }

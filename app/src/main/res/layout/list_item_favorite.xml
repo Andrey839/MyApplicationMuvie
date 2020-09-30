@@ -18,7 +18,8 @@
         android:transitionName="@{@string/transition_name_favorite(viewModel.id )}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_marginStart="@dimen/margin_start_end_item"
+        android:layout_marginEnd="@dimen/margin_start_end_item"
         app:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -32,8 +33,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textSize="@dimen/text_size_25sp"
+                android:textSize="@dimen/text_name_21sp"
                 android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_text"
                 app:textName="@{viewModel.name}" />
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -48,8 +50,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_tittle_17sp"
                 android:textStyle="italic"
+                android:layout_marginTop="@dimen/margin_text"
                 app:textYear="@{viewModel.year}" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

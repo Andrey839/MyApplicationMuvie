@@ -21,7 +21,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/margin_start_end_item"
+            android:layout_marginEnd="@dimen/margin_start_end_item">
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -31,8 +33,9 @@
                 android:layout_gravity="center"
                 android:text=""
                 android:textColor="#EEECE7E7"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_tittle_17sp"
                 android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_text"
                 android:transitionName="@{@string/transition_home(viewModel.year)}"/>
 
 
@@ -54,8 +57,9 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_25sp"
+                android:textSize="@dimen/text_tittle_17sp"
                 android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_text"
                 android:transitionName="@{@string/transition_home(viewModel.name)}"/>
 
         </LinearLayout>

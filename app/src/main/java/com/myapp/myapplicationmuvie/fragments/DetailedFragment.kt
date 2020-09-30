@@ -2,44 +2,29 @@ package com.myapp.myapplicationmuvie.fragments
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
 import com.myapp.myapplicationmuvie.R
-import com.myapp.myapplicationmuvie.database.Favorite
 import com.myapp.myapplicationmuvie.database.getDatabase
 import com.myapp.myapplicationmuvie.databinding.DetailedFragmentBinding
 import com.myapp.myapplicationmuvie.modelViews.DetailedViewModel
 import com.myapp.myapplicationmuvie.modelViews.DetailedViewModelFactory
-import com.myapp.myapplicationmuvie.networkService.TrailerJson
 import com.myapp.myapplicationmuvie.repository.Repository
-import kotlinx.android.synthetic.main.detailed_fragment.*
-import kotlinx.coroutines.*
+
+const val HTTP = "http:/"
 
 class DetailedFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DetailedFragment()
-    }
 
     private lateinit var viewModel: DetailedViewModel
     private var url: String? = null
@@ -64,12 +49,13 @@ class DetailedFragment : Fragment() {
                         viewModel.deleteFilmWithFavorite()
                         Toast.makeText(
                             this.context,
-                            "Фильм удалён из избранного",
+                            getString(R.string.film_delete_with_favorite),
                             Toast.LENGTH_LONG
                         ).show()
                     }.show()
                 }
-            } else Toast.makeText(this.context, "Фильм добавлен", Toast.LENGTH_LONG).show()
+            } else Toast.makeText(this.context, getString(R.string.film_add), Toast.LENGTH_LONG)
+                .show()
         })
 
     }
@@ -83,20 +69,21 @@ class DetailedFragment : Fragment() {
             container, false
         )
 
-       sharedElementEnterTransition = MaterialContainerTransform().apply {
-           drawingViewId = R.id.nav_host_fragment_container
-           duration = 300L
-           isElevationShadowEnabled = true
-           scrimColor = Color.TRANSPARENT
-           MaterialElevationScale(true)
-       }
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment_container
+            duration = 300L
+            isElevationShadowEnabled = true
+            scrimColor = Color.TRANSPARENT
+            MaterialElevationScale(true)
+        }
 
         val application = requireNotNull(this.activity).application
         val database = getDatabase(application)
         val repository = Repository(database)
         val argument = arguments?.let { DetailedFragmentArgs.fromBundle(it) }
 
-        val detailedViewModelFactory = argument?.id?.let { DetailedViewModelFactory(it, repository) }
+        val detailedViewModelFactory =
+            argument?.id?.let { DetailedViewModelFactory(it, repository) }
 
         binding.lifecycleOwner = this
 
@@ -110,10 +97,10 @@ class DetailedFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.urlTrailer.observe(viewLifecycleOwner, Observer {
-            if (it[0].trailer.isNotEmpty()) {
+            if (it.first().trailer.isNotEmpty()) {
                 binding.watchTrailerFilm.isEnabled = true
-                val http = "http:/"
-                val string = it[0].trailer[0].substringAfter('/')
+                val http = HTTP
+                val string = it.first().trailer.first().substringAfter('/')
                 val urlString = string.substringBefore('"')
                 url = http + urlString
             }

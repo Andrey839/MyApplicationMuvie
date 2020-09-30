@@ -14,10 +14,8 @@ class HomeViewModel(val context: Activity, dataSource: DatabaseVideo) :
 
     private val repository = Repository(dataSource)
 
-    private val _listModel = repository.listModelFilms
-
     val listModel: LiveData<List<Model>>
-    get() = _listModel
+    get() = repository.listModelFilms
 
 }
 

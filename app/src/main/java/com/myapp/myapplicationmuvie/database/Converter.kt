@@ -7,7 +7,7 @@ class ConverterList {
 
     @TypeConverter
     fun fromList(item: List<Rating>?): Rating? {
-       return item?.get(0)
+        return item?.first()
     }
 
     @TypeConverter
@@ -16,27 +16,14 @@ class ConverterList {
     }
 }
 
-class ConverterRating{
+class ConverterRating {
     @TypeConverter
-    fun fromRating(item: Rating?): String?{
+    fun fromRating(item: Rating?): String? {
         return item?.toString()
     }
 
     @TypeConverter
-    fun toRating(source: String?): Rating?{
+    fun toRating(source: String?): Rating? {
         return source?.let { Rating(source = it, rate = source) }
-    }
-}
-
-class ConverterListString{
-    @TypeConverter
-    fun withListTrailer(item: List<String>?): String?{
-        return if (item!!.isEmpty()) ""
-        else item[0]
-    }
-
-    @TypeConverter
-    fun toListTrailer(item: String?): List<String?>{
-        return listOf(item)
     }
 }

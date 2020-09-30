@@ -10,15 +10,16 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val basicUrl = "http://kinoinfo.ru/api/"
+private const val JSON = "?format=json"
 
 interface ServiceFilms {
     @GET("film/?format=json")
     fun getFilmsAsync(@Query("year") year: Int): Deferred<List<FilmsJson>>
 
-    @GET("film_posters/?format=json")
+    @GET("film_posters/$JSON")
     fun getPostersAsync(@Query("id") id: Int): Deferred<List<PosterJson>>
 
-    @GET("film_trailers/?format=json")
+    @GET("film_trailers/$JSON")
     fun getTrailersAsync(@Query("id") id: Int): Deferred<List<TrailerJson>>
 
 }

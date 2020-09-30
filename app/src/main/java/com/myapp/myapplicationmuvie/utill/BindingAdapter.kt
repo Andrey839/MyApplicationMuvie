@@ -29,13 +29,6 @@ fun ImageView.setPoster(item: String) {
     }
 }
 
-@BindingAdapter("setNameDetail")
-fun TextView.nameFilm(item: Model) {
-    let {
-        text = item.name
-    }
-}
-
 @BindingAdapter("setPosterDetail")
 fun ImageView.posterFilm(item: Model) {
     let {
@@ -55,14 +48,14 @@ fun TextView.descriptionFilm(item: Model) {
 fun TextView.ratingFilm(item: Model) {
     val string = item.ratings
     let {
-        text = "Рейтинг $string"
+        text =  "${context.getString(R.string.rating)} $string"
     }
 }
 
 @BindingAdapter("setBackground")
-fun FloatingActionButton.background(item: Any?){
+fun FloatingActionButton.background(item: Any?) {
     let {
-            if (item == null) it.setImageDrawable(resources.getDrawable(R.drawable.plus))
-            else it.setImageDrawable(resources.getDrawable(R.drawable.minus))
+        if (item == null) it.setImageDrawable(resources.getDrawable(R.drawable.plus))
+        else it.setImageDrawable(resources.getDrawable(R.drawable.minus))
     }
 }

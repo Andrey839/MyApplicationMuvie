@@ -6,12 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.myapp.myapplicationmuvie.database.Favorite
 import com.myapp.myapplicationmuvie.repository.Repository
 
-class FavoritesViewModel(repository: Repository) : ViewModel() {
-
-    private var _listFavorites = repository.listFavoriteFilms
+class FavoritesViewModel(private val repository: Repository) : ViewModel() {
 
     val listFavorites: LiveData<List<Favorite>>
-    get() = _listFavorites
+    get() = repository.listFavoriteFilms
 }
 
 class FavoritesViewModelFactory(

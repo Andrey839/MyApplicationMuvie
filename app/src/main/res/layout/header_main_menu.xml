@@ -24,7 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="70dp"
         android:textColor="#F7070707"
-        android:textSize="@dimen/text_size_25sp"
+        android:textSize="@dimen/text_name_21sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatar_view" />
 

@@ -27,10 +27,6 @@ import kotlinx.android.synthetic.main.ilist_item_home.*
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private val viewModel: HomeViewModel by lazy {
         val application = requireNotNull(this.activity).application
         val database = getDatabase(application)
@@ -64,7 +60,8 @@ class HomeFragment : Fragment() {
 
         val manager = GridLayoutManager(activity, 2)
         val adapter = AdapterFilmsNow {
-            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailedFragment(it))
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailedFragment(it))
         }
 
         binding.recyclerViewHome.adapter = adapter

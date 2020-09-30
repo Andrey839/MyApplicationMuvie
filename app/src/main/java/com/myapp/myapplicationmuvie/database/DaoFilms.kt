@@ -16,7 +16,7 @@ interface DaoFilms {
 }
 
 @Dao
-interface DaoFavorite{
+interface DaoFavorite {
 
     @Insert
     @Transaction
@@ -33,7 +33,7 @@ interface DaoFavorite{
 }
 
 @Dao
-interface DaoModel{
+interface DaoModel {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertModelFilm(film: Model)
@@ -43,7 +43,7 @@ interface DaoModel{
 }
 
 @Database(entities = [Films::class, Favorite::class, Model::class], version = 1)
-@TypeConverters(ConverterRating::class, ConverterList::class, ConverterListString::class)
+@TypeConverters(ConverterRating::class, ConverterList::class)
 abstract class DatabaseVideo : RoomDatabase() {
     abstract val daoFilms: DaoFilms
     abstract val daoFavorite: DaoFavorite

@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.myapp.myapplicationmuvie.networkService.FilmsJson
 import com.myapp.myapplicationmuvie.networkService.Rating
 import kotlinx.android.parcel.Parcelize
 
@@ -52,11 +53,6 @@ data class Favorite(
     val poster: String
 )
 
-data class Rating(
-    val source: String,
-    val rate: String
-)
-
 fun Favorite.toModel(): Model {
     return Model(
         id,
@@ -68,7 +64,7 @@ fun Favorite.toModel(): Model {
     )
 }
 
-fun Model.toFavorite(): Favorite{
+fun Model.toFavorite(): Favorite {
     return Favorite(
         id,
         description,
@@ -76,6 +72,17 @@ fun Model.toFavorite(): Favorite{
         ratings,
         name,
         poster
+    )
+}
+
+fun filmsPosterToModel(film: FilmsJson, poster: String): Model {
+    return Model(
+        id = film.id,
+        description = film.description,
+        name = film.name,
+        year = film.year,
+        ratings = film.ratings.first().rate,
+        poster = poster
     )
 }
 

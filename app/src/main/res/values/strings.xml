@@ -45,6 +45,7 @@
     <string name="transition_name_favorite">transition_favorite</string>
     <string name="transition_home">transition_home</string>
     <string name="exit_app">Выйти из приложения?</string>
+    <string name="picture_avatar">Это разрешение нужно для установки фото на аватар</string>
 
 
     <!-- Toast -->
@@ -53,5 +54,7 @@
     <string name="exit_done">Выполнен выход из аккаунта</string>
     <string name="registration_succesful">Успешная регистрация</string>
     <string name="registration_error">Регистрация не удалась</string>
+    <string name="permission_check">Разрешение получено</string>
+    <string name="avatar_check">Фото выбрано</string>
 
 </resources>

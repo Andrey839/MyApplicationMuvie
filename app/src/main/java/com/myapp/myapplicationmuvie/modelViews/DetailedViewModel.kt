@@ -30,8 +30,7 @@ class DetailedViewModel(
 
     private val _snackBoolean = MutableLiveData<Boolean>()
 
-    val favoritesValue : LiveData<Favorite>
-       get() = repository.favoriteFilm(id.id)
+    private var _favoritesValue= repository.favoriteFilm(id.id)
 
     init {
         scope.launch {
@@ -41,14 +40,17 @@ class DetailedViewModel(
         }
     }
 
+    val favoritesValue: LiveData<Favorite>
+        get() = _favoritesValue
+
     val snackBoolean: LiveData<Boolean>
-    get() = _snackBoolean
+        get() = _snackBoolean
 
     fun getModelId() {
         model.value = id
     }
 
-    fun deleteFilmWithFavorite(){
+    fun deleteFilmWithFavorite() {
         scope.launch {
             repository.deleteFavoriteFilm(id.toFavorite())
         }

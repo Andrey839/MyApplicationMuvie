@@ -2,11 +2,15 @@ package com.myapp.myapplicationmuvie
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -17,6 +21,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.myapp.myapplicationmuvie.fragments.KEY_NAME
 import com.myapp.myapplicationmuvie.fragments.KEY_URI
 import com.myapp.myapplicationmuvie.work.WorkTime
@@ -26,6 +31,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -67,9 +73,11 @@ class MainActivity : AppCompatActivity() {
         val avatarUser = header.findViewById<ImageView>(R.id.avatar_view)
 
         nameUser.text = sharedPreference?.getString(KEY_NAME, "???")
-        Glide.with(avatarUser.context).load(sharedPreference?.getString(KEY_URI, ""))
+        Glide.with(this).load(sharedPreference?.getString(KEY_URI, ""))
             .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
             .circleCrop().into(avatarUser)
+
+        Log.e("tyi", "key " +sharedPreference?.getString(KEY_URI, "???"))
     }
 
     private fun delayedInit(constraints: Constraints) {
@@ -105,9 +113,10 @@ class MainActivity : AppCompatActivity() {
 
         listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             if (key == KEY_NAME) nameUser.text = sharedPreferences.getString(key, "???")
-            else Glide.with(avatarUser.context).load(sharedPreferences.getString(KEY_URI, ""))
+            else Glide.with(this).load(sharedPreferences.getString(key, ""))
                 .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
                 .circleCrop().into(avatarUser)
+            Log.e("tyi","setting " + sharedPreferences.getString(KEY_URI, "???"))
         }
 
         sharedPreference?.registerOnSharedPreferenceChangeListener(listener)

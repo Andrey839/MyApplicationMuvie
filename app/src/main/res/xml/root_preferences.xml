@@ -21,7 +21,8 @@
 
         <Preference
             app:key="avatar"
-            app:title="@string/avatar_user"/>
+            app:title="@string/avatar_user"
+            app:isPreferenceVisible="true"/>
 
         <EditTextPreference
             app:key="rename"

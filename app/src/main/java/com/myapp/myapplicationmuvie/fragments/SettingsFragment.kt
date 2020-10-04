@@ -1,15 +1,24 @@
 package com.myapp.myapplicationmuvie.fragments
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.myapp.myapplicationmuvie.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 const val KEY_RENAME = "rename"
 private const val KEY_AVATAR = "avatar"
@@ -19,6 +28,19 @@ private const val GIVE_IMAGE = "image/*"
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
+    private var visiblePreferencePhoto: Boolean = true
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){permissions ->
+        permissions.entries.forEach {
+            if (it.value) {
+                Toast.makeText(view?.context,getString(R.string.permission_check), Toast.LENGTH_LONG).show()
+                visiblePreferencePhoto = true
+            }
+            else visiblePreferencePhoto = false
+        }
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
@@ -27,12 +49,39 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val editor = sharedPreferences?.edit()
         val photoPreference = findPreference<Preference>(KEY_AVATAR)
 
+        photoPreference?.isVisible = visiblePreferencePhoto
+
         val getUri = registerForActivityResult(ActivityResultContracts.GetContent()) {
             editor?.putString(KEY_URI, it.toString())?.apply()
+            Toast.makeText(context, getString(R.string.avatar_check), Toast.LENGTH_LONG).show()
         }
 
         photoPreference?.setOnPreferenceClickListener {
-            getUri.launch(GIVE_IMAGE)
+            when {
+                (context?.let { it1 ->
+                    ContextCompat.checkSelfPermission(
+                        it1,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }
+                        == PackageManager.PERMISSION_GRANTED) && (context?.let { it1 ->
+                    ContextCompat.checkSelfPermission(
+                        it1,Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
+                        == PackageManager.PERMISSION_GRANTED) -> {
+                    getUri.launch(GIVE_IMAGE)
+                }
+                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                    view?.let { it1 ->
+                        Snackbar.make(it1,getString(R.string.picture_avatar), Snackbar.LENGTH_LONG).setAction(getString(R.string.OK)){
+                            requestPermissionLauncher.launch(
+                                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
+                        }
+                    }
+                }
+                else -> {
+                    requestPermissionLauncher.launch(
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
+                }
+            }
             true
         }
 

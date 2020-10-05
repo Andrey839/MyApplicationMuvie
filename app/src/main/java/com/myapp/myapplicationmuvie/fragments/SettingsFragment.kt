@@ -31,15 +31,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var visiblePreferencePhoto: Boolean = true
 
     private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){permissions ->
-        permissions.entries.forEach {
-            if (it.value) {
-                Toast.makeText(view?.context,getString(R.string.permission_check), Toast.LENGTH_LONG).show()
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(
+                    view?.context,
+                    getString(R.string.permission_check),
+                    Toast.LENGTH_LONG
+                ).show()
                 visiblePreferencePhoto = true
-            }
-            else visiblePreferencePhoto = false
+            } else visiblePreferencePhoto = false
+
         }
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -49,37 +51,41 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val editor = sharedPreferences?.edit()
         val photoPreference = findPreference<Preference>(KEY_AVATAR)
 
-        photoPreference?.isVisible = visiblePreferencePhoto
-
         val getUri = registerForActivityResult(ActivityResultContracts.GetContent()) {
             editor?.putString(KEY_URI, it.toString())?.apply()
             Toast.makeText(context, getString(R.string.avatar_check), Toast.LENGTH_LONG).show()
         }
 
         photoPreference?.setOnPreferenceClickListener {
+            if (!visiblePreferencePhoto) Toast.makeText(
+                context,
+                getString(R.string.permission_no_check),
+                Toast.LENGTH_LONG
+            ).show()
             when {
                 (context?.let { it1 ->
                     ContextCompat.checkSelfPermission(
-                        it1,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-                        == PackageManager.PERMISSION_GRANTED) && (context?.let { it1 ->
-                    ContextCompat.checkSelfPermission(
-                        it1,Manifest.permission.READ_EXTERNAL_STORAGE)
+                        it1, Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                 }
                         == PackageManager.PERMISSION_GRANTED) -> {
+
                     getUri.launch(GIVE_IMAGE)
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
                     view?.let { it1 ->
-                        Snackbar.make(it1,getString(R.string.picture_avatar), Snackbar.LENGTH_LONG).setAction(getString(R.string.OK)){
-                            requestPermissionLauncher.launch(
-                                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
-                        }
+                        Snackbar.make(it1, getString(R.string.picture_avatar), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.OK)) {
+                                requestPermissionLauncher.launch(
+                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                )
+                            }
                     }
                 }
                 else -> {
                     requestPermissionLauncher.launch(
-                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                 }
             }
             true

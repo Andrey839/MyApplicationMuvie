@@ -76,8 +76,6 @@ class MainActivity : AppCompatActivity() {
         Glide.with(this).load(sharedPreference?.getString(KEY_URI, ""))
             .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
             .circleCrop().into(avatarUser)
-
-        Log.e("tyi", "key " +sharedPreference?.getString(KEY_URI, "???"))
     }
 
     private fun delayedInit(constraints: Constraints) {
@@ -116,7 +114,6 @@ class MainActivity : AppCompatActivity() {
             else Glide.with(this).load(sharedPreferences.getString(key, ""))
                 .error(resources.getDrawable(R.drawable.ic_baseline_broken_image))
                 .circleCrop().into(avatarUser)
-            Log.e("tyi","setting " + sharedPreferences.getString(KEY_URI, "???"))
         }
 
         sharedPreference?.registerOnSharedPreferenceChangeListener(listener)

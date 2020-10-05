@@ -56,5 +56,6 @@
     <string name="registration_error">Регистрация не удалась</string>
     <string name="permission_check">Разрешение получено</string>
     <string name="avatar_check">Фото выбрано</string>
+    <string name="permission_no_check">Разрешение не получено функция установки фото не работает</string>
 
 </resources>
